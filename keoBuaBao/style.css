@@ -1,0 +1,146 @@
+* {
+  font-family: "popins", sans-serif;
+}
+
+body {
+  text-align: center;
+}
+
+h1 {
+  margin: 0 auto;
+  margin-top: 100px;
+}
+
+.body {
+  margin: 0 auto;
+  margin-top: 50px;
+  width: 1000px;
+  height: 400px;
+  background-color: #ffc300;
+  display: flex;
+  flex-direction: row;
+  border: 1px #999 solid;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.player,
+.CPU {
+  width: 400px;
+  height: 400px;
+  background-color: white;
+}
+
+.player .name,
+.CPU .name {
+  background-color: #ffc300;
+  height: 30px;
+}
+
+.player .board,
+.CPU .board {
+  height: 300px;
+  border: 1px #999 solid;
+  border-radius: 3px;
+  box-shadow: rgb(153, 157, 161) 3px 3px 6px 0px inset,
+    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  font-size: 120px;
+  color: orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player .option,
+.CPU .option {
+  height: 70px;
+  width: 400px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffc300;
+}
+
+.player .option div,
+.CPU .option div {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  margin: 0 3px;
+  border-radius: 2px;
+  font-size: 24px;
+  color: aliceblue;
+  cursor: pointer;
+  border: 2px #fff solid;
+}
+
+.player .option div:hover,
+.CPU .option div:hover {
+  background-color: #999;
+  transition: 0.1s;
+}
+
+.player .option div:active,
+.CPU .option div:active {
+  background-color: #333;
+  transition: 0.1s;
+}
+
+.option .active {
+  background-color: #2dbc64;
+}
+
+.center {
+  width: 200px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.lichSu {
+  width: 180px;
+  margin: 0 auto;
+  height: 340px;
+  display: flex;
+  flex-direction: column;
+}
+
+.lichSu .title {
+  height: 40px;
+}
+
+.lichSu .text {
+  background-color: #fff;
+  height: 280px;
+  border-radius: 5px;
+}
+
+.button {
+  margin: auto;
+  height: 40px;
+  background-color: #03ad44;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+  color: #fff;
+}
+
+.button:active {
+  background-color: rgb(9, 133, 133);
+  transition: 0.1s;
+}
+
+.text ul li {
+  list-style-type: decimal;
+}
+
+.text {
+  overflow-y: scroll;
+}

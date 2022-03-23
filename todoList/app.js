@@ -1,6 +1,3 @@
-
-let button = document.querySelector('.button')
-
 document.querySelector('#myText').addEventListener('keypress',function(e){
     if (e.key === 'Enter') {
         myFuntion()
