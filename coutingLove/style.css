@@ -1,0 +1,39 @@
+.box {
+  position: relative;
+  background: #fff;
+  border: 2px #fff solid;
+  box-sizing: border-box;
+  height: 150px;
+  width: 150px;
+  border-radius: 100%;
+  outline: 0;
+  overflow: hidden;
+  z-index: -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  opacity: 0;
+  transition: 0.3s ease-in-out;
+}
+.box::after {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: -50%;
+  height: 200%;
+  width: 200%;
+  box-sizing: border-box;
+  background-color: #ff9a8b;
+  border-radius: 40%;
+  animation: spin 15s infinite;
+  z-index: -1;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
