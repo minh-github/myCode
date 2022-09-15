@@ -1,4 +1,6 @@
 * {
+  padding: 0;
+  margin: 0;
   font-family: "Poppins", sans-serif;
   background-color: #f1f1f1;
 }
@@ -28,18 +30,32 @@ h1 {
   height: 40px;
   justify-content: left;
   align-items: center;
-  width: 500px;
+  width: 100%;
+}
+
+.input{
+  width: 100%;
 }
 
 .input input {
-  height: 40px;
-  width: 430px;
+  /* height: 40px;
+  width: 430px; */
+  height: 100%;
+  width: 100%;
   left: 0;
   border: none;
   background-color: #959596;
   color: white;
   padding: 0 10px;
   outline: none;
+}
+
+.input input::placeholder{
+  color: #f1f1f1;
+  transition: 0.1s;
+}
+.input input:focus::placeholder{
+  color: gray;
 }
 
 .button {
@@ -68,7 +84,7 @@ h1 {
 
 .lists {
   box-sizing: border-box;
-  width: 500px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: left;
