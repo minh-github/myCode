@@ -67,19 +67,19 @@ function App() {
         const htmlsListDay = res.anotherDays.map(element =>{
             return `
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 ">
-                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white day">
+                <th scope="row" class="py-2 px-4 font-medium text-gray-900 whitespace-nowrap dark:text-white day">
                     ${element.date}
                 </th>
-                <td class="py-4 px-6 maxTemp">
+                <td class="py-2 px-4 maxTemp text-xs">
                     ${element.day.maxtemp_c}˚C
                 </td>
-                <td class="py-4 px-6 minTemp">
+                <td class="py-2 px-4 minTemp">
                     ${element.day.mintemp_c}˚C
                 </td>
-                <td class="py-4 px-6 weather">
+                <td class="py-2 px-4 weather">
                     ${element.day.condition.text}
                 </td>
-                <td class="py-4 px-6 icon">
+                <td class="py-2 px-4 icon">
                     <img src="${element.day.condition.icon}">
                 </td>
             </tr>`
