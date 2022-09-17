@@ -20,7 +20,7 @@ function App() {
       }
 
     function getWeather() {
-        fetch(`http://api.weatherapi.com/v1/forecast.json?key=4a058977ff3c4c6cbee111653221509&q=${city}&days=7&aqi=no&alerts=yes`)
+        fetch(`https://api.weatherapi.com/v1/forecast.json?key=4a058977ff3c4c6cbee111653221509&q=${city}&days=7&aqi=no&alerts=yes`)
             .then(response => response.json())
             .then(response => {
                 data.location = response.location
@@ -45,9 +45,12 @@ function App() {
                         <div class="font-semibold text-6xl py-5">${res.currentDays.temp_c}˚C</div>
                         <div>Feel like ${res.currentDays.feelslike_c}˚C</div>
                     </div>
-                    <div class="mx-5">
-                        <div class="font-semibold">${res.currentDays.condition.text}</div>
-                        <div>${res.location.name}</div>
+                    <div class="mx-10 py-5">
+                        <div>${res.currentDays.condition.text}</div>
+                        <div> in 
+                        <strong class="font-bold">
+                            ${res.location.name}</div>
+                        </strong>
                     </div>
                 </div>
                 <div>
