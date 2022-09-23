@@ -184,6 +184,8 @@ body{
     box-sizing:border-box;
     transform-style:preserve-3d;
     -webkit-transform-style:preserve-3d;
+
+    font-size: 13px;
   }
   
   .dot::after{
