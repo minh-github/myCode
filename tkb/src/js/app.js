@@ -7,11 +7,14 @@ let back = document.querySelector('.backcontainer')
 
 back.addEventListener("click", function(){
   cardElement.classList.remove("flipped")
+  $tag.classList.remove("slide")
 })
 
 var $window = document.querySelector('body');
 var $month = document.querySelector('.js-month')
 var $tbody = document.getElementById('js-calendar-body')
+var $tag = document.querySelector('.banner')
+var $tag_today = document.querySelector('.banner .banner-day')
 
 var weekday = new Array();
 weekday[0] =  "Sunday";
@@ -81,7 +84,7 @@ function calendarBody(year, month, today){
   var d  = (today.getDate());
   document.getElementById('day').innerHTML = wd;
   document.getElementById('date').innerHTML = d;
-
+  $tag_today.innerHTML = d
   $tbody.innerHTML = tableBody;
 }
 
@@ -92,11 +95,10 @@ function calendarHeading(year, num){
 function highLight(value) {
     
     let days = document.querySelectorAll(".whiteTr th")
-
     for (const day of days) {
-        day.className = '';
+        day.classList.remove('active');
         if(day.innerHTML == value) {
-            day.className = 'active';
+            day.classList.add('active');
         }
      }
 }
@@ -107,17 +109,19 @@ function getWorkMark(value, content) {
   value.forEach((element,index) => {
     days.forEach(day =>{
       if(day.innerHTML == Number(element)) {
-        day.className = 'dot';
+        day.classList.add('dot');
 
         let affter = ''
         content[index].forEach(item => {
-          item = `<li class"back_mon"  style="margin-bottom: 12px">${item}</li>`
+          item = `<li style="margin-bottom: 12px">${item}</li>`
           affter += item
         });
 
         day.setAttribute('value', affter)  
         day.addEventListener("click", () => {
             cardElement.classList.add("flipped")
+            $tag.classList.add("slide")
+            $tag_today.innerHTML = element
             back.innerHTML = day.getAttribute('value')
         })
       }
@@ -239,26 +243,34 @@ weekday[6] = "Thứ bảy";
                         tietTemp.push(item_con.split(' tiết')[1].split(' tại')[0])
                         diaDiemTemp.push(item_con.split(' tại')[1])
                     }
-                   
                 });
                 
                 if(thuTemp.length>0){subData.Thu.push(thuTemp)}
                 if(diaDiemTemp.length>0){subData.DiaDiem.push(diaDiemTemp)}
                 if(tietTemp.length>0){subData.Tiet.push(tietTemp)}
-
             });
+            console.log(subData);
     
             subData.LichHoc.forEach((element, index) => {
                 
-                let from = element.split(':')[0].slice(0,10)
-                if((from.slice(0,2)+1)/2){
-                    subData.NgayBatDau.push(from)
+                if(element.length < 28){
+                    let arr = element.split(':')
+                    arr.splice(0,2)
+                    element = ' '
                 }
-                let to = element.split(':')[0].slice(15,25)
-                if((to.slice(0,2)+1)/2){
-                    subData.NgayKetThuc.push(to)
-                }
-            });
+                    let from = element.split(':')[0].slice(0,10)
+                    
+                    if((from.slice(0,2)+1)/2){
+                        subData.NgayBatDau.push(from)
+                    }
+                    
+                    let to = element.split(':')[0].slice(15,25)
+                    
+                    
+                    if((to.slice(0,2)+1)/2){
+                        subData.NgayKetThuc.push(to)
+                    }
+                });
             
             bigData.push(subData);
         })
@@ -269,8 +281,16 @@ weekday[6] = "Thứ bảy";
                 fommatDate(day,subBigData.NgayKetThuc[index],subBigData.Thu[index],subBigData.TenMonHoc, indexBig, index, subBigData.Tiet[index],subBigData.DiaDiem[index])
             })
         });
-
         function getWorkDays(from,to, Thu, monHoc, iBig, i, tiet, diaDiem){
+            let tietChuan = []
+            let diaDiemChuan = []
+            if(tiet.length > 0){
+                tietChuan.push(tiet)
+            }
+            if(diaDiem.length != 0){
+                diaDiemChuan.push(diaDiem)
+            }
+
             const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
             const firstDate = new Date(from);
             const secondDate = new Date(to);
@@ -290,10 +310,10 @@ weekday[6] = "Thứ bảy";
                 // console.log(new Date(nextDay*1000).toISOString().slice(0,10));
     
                 let thu = new Date(nextDay*1000).getDay()
-
-                Thu.forEach((a)=>{
+    
+                Thu.forEach((a,index)=>{
                     if(thu == Number(a)-1){
-                        dayTemp.checkHoc.push(monHoc)
+                        dayTemp.checkHoc.push(monHoc + '</br> Tiết ' + tietChuan[0][index] + ' - ' + diaDiemChuan[0][index])
                     }
                 })
                 // console.log(tiet);
@@ -319,15 +339,13 @@ weekday[6] = "Thứ bảy";
         let days = []
         
         bigData.forEach(data =>{
-          let i = 0
             data.CacNgay.forEach(item =>{
                 if(item.checkHoc.length > 0){
-                    item.checkHoc+= '</br>    Tiết' + data.Tiet[i] + ' - ' + data.DiaDiem[i]
                     days.push(item)
-                    i++
                 }
             })
         })
+
         console.log(days);
 
         let ngay = []
