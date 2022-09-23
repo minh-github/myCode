@@ -249,7 +249,6 @@ weekday[6] = "Thứ bảy";
                 if(diaDiemTemp.length>0){subData.DiaDiem.push(diaDiemTemp)}
                 if(tietTemp.length>0){subData.Tiet.push(tietTemp)}
             });
-            console.log(subData);
     
             subData.LichHoc.forEach((element, index) => {
                 
@@ -346,8 +345,6 @@ weekday[6] = "Thứ bảy";
             })
         })
 
-        console.log(days);
-
         let ngay = []
         let mon = []
 
@@ -368,9 +365,8 @@ weekday[6] = "Thứ bảy";
         })
 
         let monHocT9 = []
-
         ngay.forEach((date, index) =>{
-            if (date.slice(5,7) == 9) {
+            if (date.slice(5,7) == today.getMonth()+1) {
                 monHocT9.push({date: date, mon:mon[index]})
             }
         })
