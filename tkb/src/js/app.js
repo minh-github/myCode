@@ -150,15 +150,14 @@ function UploadProcess() {
     document.querySelector('.blockInsert').classList.remove('show')
     document.querySelector('.overlay').classList.remove('show')
         //Reference the FileUpload element.
-        var fileUpload = document.getElementById("fileUpload");
+        let fileUpload = document.getElementById("fileUpload");
         
         //Validate whether File is valid Excel file.
-        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$/;
-        if (regex.test(fileUpload.value.toLowerCase())) {
+        // var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$/;
+        // if (regex.test(fileUpload.value.toLowerCase())) {
             if (typeof (FileReader) != "undefined") {
                 var reader = new FileReader();
-                
-                //For Browsers other than IE.
+
                 if (reader.readAsBinaryString) {
                     reader.onload = function (e) {
                         localStorage.setItem('fileRaw', e.target.result);
@@ -180,9 +179,9 @@ function UploadProcess() {
             } else {
                 alert("This browser does not support HTML5.");
             }
-        } else {
-            alert("Please upload a valid Excel file.");
-        }
+        // } else {
+        //     alert("Please upload a valid Excel file.");
+        // }
     };
 
 }
