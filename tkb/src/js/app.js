@@ -130,13 +130,25 @@ function getWorkMark(value, content) {
 app()
 let bigData = []
 
+document.querySelector('.logout').addEventListener("click", () => {
+    localStorage.removeItem('fileRaw')
+    location.reload();
+});
 
+if(localStorage.getItem('fileRaw')){
+    let fileRaw = localStorage.getItem('fileRaw');
+    GetTableFromExcel(fileRaw);
+}
+else{
+document.querySelector('.overlay').classList.add('show')
+document.querySelector('.blockInsert').classList.add('show')
 
-document.querySelector('#upload').addEventListener('click',UploadProcess)
+document.querySelector('#fileUpload').addEventListener('change',UploadProcess)
 
 // GetTableFromExcel(data, objTest)
-let obj = []
-    function UploadProcess() {
+function UploadProcess() {
+    document.querySelector('.blockInsert').classList.remove('show')
+    document.querySelector('.overlay').classList.remove('show')
         //Reference the FileUpload element.
         var fileUpload = document.getElementById("fileUpload");
         
@@ -149,6 +161,7 @@ let obj = []
                 //For Browsers other than IE.
                 if (reader.readAsBinaryString) {
                     reader.onload = function (e) {
+                        localStorage.setItem('fileRaw', e.target.result);
                         GetTableFromExcel(e.target.result);
                     };
                     reader.readAsBinaryString(fileUpload.files[0]);
@@ -171,6 +184,10 @@ let obj = []
             alert("Please upload a valid Excel file.");
         }
     };
+
+}
+
+
     function GetTableFromExcel(data) {
         var workbook = XLSX.read(data, {
             type: 'binary'
