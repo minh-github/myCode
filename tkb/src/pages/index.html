@@ -5,10 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/app.css">
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
     <title>Document</title>
 </head>
 <body>
+  <input type="file" id="fileUpload"/>
+  <input type="button" id="upload" value="Upload" />
+<br/>
+<div id="ExcelTable"></div>
     <div class="container">
+      <body>
       <div class="banner">
         <span class="banner-day">20</span>
       </div>
@@ -18,7 +24,7 @@
             <div class="month">
               <table>
                 <tr class="orangeTr">
-                  <th>S</th>
+                  <th style="font-size: 14px; color: red; font-weight: 600;">S</th>
                   <th>M</th>
                   <th>T</th>
                   <th>W</th>
@@ -48,6 +54,9 @@
       </div>
     </div>
   </body>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/xlsx.full.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/jszip.js"></script>
   <script type="module" src="../js/app.js"></script>
   <!-- <script src="./access/test.js"></script> -->
 </html>

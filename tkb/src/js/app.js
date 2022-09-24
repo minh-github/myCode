@@ -17,39 +17,38 @@ var $tag = document.querySelector('.banner')
 var $tag_today = document.querySelector('.banner .banner-day')
 
 var weekday = new Array();
-weekday[0] =  "Sunday";
-weekday[1] = "Monday";
-weekday[2] = "Tuesday";
-weekday[3] = "Wednesday";
-weekday[4] = "Thursday";
-weekday[5] = "Friday";
-weekday[6] = "Saturday";
+weekday[0] =  "Chủ Nhật";
+weekday[1] = "Thứ Hai";
+weekday[2] = "Thứ Ba";
+weekday[3] = "Thứ Tư";
+weekday[4] = "Thứ Năm";
+weekday[5] = "Thứ Sáu";
+weekday[6] = "Thứ bảy";
 
 var month = new Array();
-month[0] = "January";
-month[1] = "February";
-month[2] = "March";
-month[3] = "April";
-month[4] = "May";
-month[5] = "June";
-month[6] = "July";
-month[7] = "August";
-month[8] = "September";
-month[9] = "October";
-month[10] = "November";
-month[11] = "December";
+month[0] = "THÁNG MỘT";
+month[1] = "THÁNG HAI";
+month[2] = "THÁNG BA";
+month[3] = "THÁNG TƯ";
+month[4] = "THÁNG NĂM";
+month[5] = "THÁNG SÁU";
+month[6] = "THÁNG BẢY";
+month[7] = "THÁNG TÁM";
+month[8] = "THÁNG CHÍN";
+month[9] = "THÁNG MƯỜI";
+month[10] = "THÁNG MƯỜI MỘT";
+month[11] = "THÁNG MƯỜI HAI";
 
 var today = new Date();
 var currentYear = today.getFullYear(),
     currentMonth = today.getMonth();
 
-window.addEventListener('load',function(){
+function app(){
   calendarHeading(currentYear, currentMonth);
   calendarBody(currentYear, currentMonth, today);
   highLight(today.getDate());
 
-  GetTableFromExcel(objTest)
-});
+};
 
 function calendarBody(year, month, today){
   var todayYMFlag = today.getFullYear() === year && today.getMonth() === month ? true : false;
@@ -74,7 +73,7 @@ function calendarBody(year, month, today){
       }
       var addClass = todayYMFlag && textDate === today.getDate() && !textSkip ? 'is-today' : '';
       var textTh = textSkip ? '&nbsp;' : textDate++;
-      var th = '<th class="'+addClass+'">'+textTh+'</th>';
+      var th = '<th class="'+addClass+'" style="cursor: pointer">'+textTh+'</th>';
       tr += th;
     }
     tr += '</tr>';
@@ -128,70 +127,61 @@ function getWorkMark(value, content) {
     })
   });
 }
-
+app()
 let bigData = []
 
-var weekday = new Array();
-weekday[0] =  "Chủ Nhật";
-weekday[1] = "Thứ Hai";
-weekday[2] = "Thứ Ba";
-weekday[3] = "Thứ Tư";
-weekday[4] = "Thứ Năm";
-weekday[5] = "Thứ Sáu";
-weekday[6] = "Thứ bảy";
 
-// document.querySelector('#upload').addEventListener('click',GetTableFromExcel(objTest))
+
+document.querySelector('#upload').addEventListener('click',UploadProcess)
 
 // GetTableFromExcel(data, objTest)
-
-// let obj = []
-//     function UploadProcess() {
-//         //Reference the FileUpload element.
-//         var fileUpload = document.getElementById("fileUpload");
+let obj = []
+    function UploadProcess() {
+        //Reference the FileUpload element.
+        var fileUpload = document.getElementById("fileUpload");
         
-//         //Validate whether File is valid Excel file.
-//         var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$/;
-//         if (regex.test(fileUpload.value.toLowerCase())) {
-//             if (typeof (FileReader) != "undefined") {
-//                 var reader = new FileReader();
+        //Validate whether File is valid Excel file.
+        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$/;
+        if (regex.test(fileUpload.value.toLowerCase())) {
+            if (typeof (FileReader) != "undefined") {
+                var reader = new FileReader();
                 
-//                 //For Browsers other than IE.
-//                 if (reader.readAsBinaryString) {
-//                     reader.onload = function (e) {
-//                         GetTableFromExcel(e.target.result);
-//                     };
-//                     reader.readAsBinaryString(fileUpload.files[0]);
-//                 } else {
-//                     //For IE Browser.
-//                     reader.onload = function (e) {
-//                         var data = "";
-//                         var bytes = new Uint8Array(e.target.result);
-//                         for (var i = 0; i < bytes.byteLength; i++) {
-//                             data += String.fromCharCode(bytes[i]);
-//                         }
-//                         GetTableFromExcel(data);
-//                     };
-//                     reader.readAsArrayBuffer(fileUpload.files[0]);
-//                 }
-//             } else {
-//                 alert("This browser does not support HTML5.");
-//             }
-//         } else {
-//             alert("Please upload a valid Excel file.");
-//         }
-//     };
-    function GetTableFromExcel(objTest) {
-        // var workbook = XLSX.read(data, {
-        //     type: 'binary'
-        // });
+                //For Browsers other than IE.
+                if (reader.readAsBinaryString) {
+                    reader.onload = function (e) {
+                        GetTableFromExcel(e.target.result);
+                    };
+                    reader.readAsBinaryString(fileUpload.files[0]);
+                } else {
+                    //For IE Browser.
+                    reader.onload = function (e) {
+                        var data = "";
+                        var bytes = new Uint8Array(e.target.result);
+                        for (var i = 0; i < bytes.byteLength; i++) {
+                            data += String.fromCharCode(bytes[i]);
+                        }
+                        GetTableFromExcel(data);
+                    };
+                    reader.readAsArrayBuffer(fileUpload.files[0]);
+                }
+            } else {
+                alert("This browser does not support HTML5.");
+            }
+        } else {
+            alert("Please upload a valid Excel file.");
+        }
+    };
+    function GetTableFromExcel(data) {
+        var workbook = XLSX.read(data, {
+            type: 'binary'
+        });
 
-        // var Sheet = workbook.SheetNames[0];
+        var Sheet = workbook.SheetNames[0];
 
-        // var excelRows = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[Sheet]);
+        var excelRows = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[Sheet]);
 
-        // console.log(excelRows);
         let obj = []
-        objTest.forEach((element,index) => {
+        excelRows.forEach((element,index) => {
             // console.log(getObjKey(element, 'KHOA CÔNG NGHỆ THÔNG TIN - ĐHTN'));
             if(element['KHOA CÔNG NGHỆ THÔNG TIN - ĐHTN']/2){
                 if(element.__EMPTY_2 == undefined){
