@@ -137,6 +137,7 @@ document.querySelector('#upload').addEventListener('click',UploadProcess)
 // GetTableFromExcel(data, objTest)
 let obj = []
     function UploadProcess() {
+        alert('alo')
         //Reference the FileUpload element.
         var fileUpload = document.getElementById("fileUpload");
         
