@@ -18,7 +18,7 @@ body{
   }
   .card{
     width:100%;
-    height:100%;
+    height: 225px;
     position:absolute;
     transform-style:preserve-3d;
     -webkit-transform-style:preserve-3d;
@@ -81,7 +81,7 @@ body{
     backface-visibility: hidden;
   }
   .date{
-    height:100%;
+    height:97%;
     width:130px;
     float:left;
     background-color:#E76642;
@@ -284,4 +284,40 @@ body{
     color: #E76642;
     transition: .1s;
     transform: scale(1.2);
+  }
+  
+  .pre, .next{
+    position: absolute;
+    top: 50%;
+    z-index: 12;
+    cursor: pointer;
+    font-size: 26px;
+    opacity: 1;
+  }
+  .pre.active, .next.active{
+    transform: translateY(10px);
+    cursor: default;
+    opacity: 0;
+  }
+  .pre{
+    left: -27px;
+    transition: .2s;
+  }
+  .next{
+    right: -40px;
+    transition: .2s;
+  }
+  .pre:hover, .next:hover{
+    color: #ECECE7;
+    transform: scale(1.2);
+  }
+  .pre:active, .next:active{
+    color: #E76642;
+    transform: scale(1.5);
+  }
+  .thisMonth{
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%)
   }
