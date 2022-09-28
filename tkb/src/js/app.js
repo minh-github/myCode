@@ -253,7 +253,12 @@ function GetTableFromExcel(data) {
             }
             item.split(':')[1].split('Thứ ').forEach((item_con,index) => {
                 if(item_con.length > 1 && item_con.search(' tiết')>0){ 
-                    thuTemp.push(item_con.slice(0,1))
+                    if(item_con.slice(0,1)/2){
+                        thuTemp.push(item_con.slice(0,1))
+                    }
+                    else{
+                        thuTemp.push('1')
+                    }
                     tietTemp.push(item_con.split(' tiết')[1].split(' tại')[0])
                     diaDiemTemp.push(item_con.split(' tại')[1])
                 }
@@ -261,6 +266,7 @@ function GetTableFromExcel(data) {
             if(thuTemp.length>0){subData.Thu.push(thuTemp)}
             if(diaDiemTemp.length>0){subData.DiaDiem.push(diaDiemTemp)}
             if(tietTemp.length>0){subData.Tiet.push(tietTemp)}
+
         });
 
         subData.LichHoc.forEach((element) => {     
@@ -282,6 +288,7 @@ function GetTableFromExcel(data) {
         
         bigData.push(subData);
     })
+    console.log(bigData);
 
     bigData.forEach((subBigData, indexBig) =>{
         subBigData.NgayBatDau.forEach((day,index) =>{
